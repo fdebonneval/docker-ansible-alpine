@@ -19,25 +19,37 @@ LABEL maintainer="Pascal A. <pascalito@gmail.com>" \
 
 RUN apk --update --no-cache add \
         ca-certificates \
+	curl \
         git \
+        jq \
+        make \
         openssh-client \
         openssl \
-        python3\
+        python3 \
         rsync \
         sshpass
 
 RUN apk --update add --virtual \
         .build-deps \
-        python3-dev \
-        libffi-dev \
-        openssl-dev \
+        autoconf \
+        automake \
         build-base \
+	gcc \
+	libc-dev \
+        libffi-dev \
+        libtool \
+        openssl-dev \
+        python3-dev \
  && pip3 install --upgrade \
         pip \
         cffi \
  && pip3 install \
         ansible==${ANSIBLE_VERSION} \
-        ansible-lint==${ANSIBLE_LINT_VERSION} \
+        ansible-lint==${ANSIBLE_LINT_VERSION}
+
+RUN git clone https://github.com/a-delannoy/yaani.git \
+ && cd yaani \
+ && pip3 install -r requirements.txt \
  && apk del \
         .build-deps \
  && rm -rf /var/cache/apk/*
