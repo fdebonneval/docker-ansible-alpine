@@ -6,6 +6,7 @@ ARG ANSIBLE_VERSION
 ARG ANSIBLE_LINT_VERSION
 ARG VCS_REF
 
+
 # Metadata
 LABEL maintainer="Pascal A. <pascalito@gmail.com>" \
       org.label-schema.url="https://github.com/pad92/docker-ansible-alpine/blob/master/README.md" \
